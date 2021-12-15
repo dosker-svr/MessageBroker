@@ -1,0 +1,1 @@
+GET http://localhost:8080/active/send?queue_name=some_queue&message=Some message from GET for some_queue&id_message=17

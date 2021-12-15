@@ -1,0 +1,8 @@
+POST http://localhost:8080/active/send
+Content-Type: application/json
+
+{
+  "queueName": "some_queue",
+  "body": "Some message from POST for some_queue",
+  "id": 25
+}
