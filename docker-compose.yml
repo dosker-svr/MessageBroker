@@ -1,26 +1,24 @@
 version: '3'
 services:
-  message_broker:
-    image: message_broker
-    build: ./
-    container_name: message_broker_cont
-    ports:
-      - 8080:8080
-      #environment:
-      #POSTGRES_HOST: db
-    #restart: always
-    depends_on:
-      - db
   db:
-    image: postgres:11.4-alpine
+    image: postgres:11.14-alpine
     container_name: postgres
     ports:
-      - 5432:5432
+      - 5432:5434
     volumes:
-      - ./pg_data:/var/lib/postgresql/data/pgdata
+     - ./data:/var/lib/postgresql/data/pgdata
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_BD: message_broker
       PGDATA: /var/lib/postgresql/data/pgdata
-    #restart: always
+    restart: always
+
+  message_broker:
+    image: message_broker_image
+    container_name: message_broker_container
+    ports:
+      - 8080:8080
+    restart: always
+    depends_on:
+      - db
